@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { Document } from '../model/Document';
 
-// Define the base URL for your API
-const API_BASE_URL = 'http://localhost:3000'; // Adjust this to match your backend URL
+const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:3000';
 
 // // Define the Document interface
 // interface Document {
