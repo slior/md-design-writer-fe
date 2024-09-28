@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { Document } from '../model/Document';
 
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:3000';
+const dbg = (s : string) => {
+  console.log(s || '')
+}
 
-// // Define the Document interface
-// interface Document {
-//   id: string;
-//   title: string;
-//   // Add other properties as needed
-// }
+const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:3000';
+dbg(`Base URL is: ${API_BASE_URL}`)
 
 // Function to fetch all documents
 export const fetchDocuments = async (): Promise<Document[]> => {
