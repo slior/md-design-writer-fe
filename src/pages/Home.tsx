@@ -7,11 +7,6 @@ import { fetchDocument, updateDocument, createDocument } from '../services/api';
 import { Document } from '../model/Document';
 import './Home.css';
 
-// interface Document {
-//   id: string;
-//   title: string;
-//   content: string;
-// }
 const DEFAULT_AUTHOR = 'Anonymous';
 
 
@@ -67,6 +62,13 @@ const Home: React.FC = () => {
     setCurrentDocument({ id: '', title: 'New Document', content: '# New Document', author: DEFAULT_AUTHOR });
   };
 
+  const getViewUrl = () => {
+    if (currentDocument) {
+      return `/view/${currentDocument.id}`;
+    }
+    return '#';
+  };
+
   return (
     <div className="home-container">
       <header className="home-header">
@@ -81,7 +83,19 @@ const Home: React.FC = () => {
           {currentDocument ? (
             <>
               <Editor content={currentDocument.content} onChange={handleContentChange} />
-              <SaveButton onClick={handleSave} isSaving={isSaving} disabled={!currentDocument.content} />
+              <SaveButton onClick={handleSave} isSaving={isSaving} disabled={!currentDocument.content}/>
+              <a  href={getViewUrl()} target="_blank" rel="noopener noreferrer"
+                  onClick={(e) => {
+                    if (!currentDocument) {
+                      e.preventDefault();
+                      alert('No document is currently loaded.');
+                    }
+                }}
+              >
+                <button disabled={!currentDocument} className="new-document-button">
+                  View Only
+                </button>
+              </a>
             </>
           ) : (
             <p>Select a document or create a new one to start editing.</p>
