@@ -4,6 +4,10 @@ import { fetchDocument } from '../services/api'
 import { Document} from '../model/Document'
 import Viewer  from '../components/Viewer/Viewer'
 
+function dbg(s : string) 
+{
+  console.log(s || '');
+}
 
 const ViewPage = () => {
     const { id } = useParams<{ id: string }>(); // Get the document ID from the URL
@@ -12,13 +16,16 @@ const ViewPage = () => {
     const [error, setError] =  useState<string | null>(null);
   
     useEffect(() => {
-      const loadDocument = async () => {
+      const loadDocument = async () => 
+      {
+        dbg(`id is ${id}`)
         try
         {
             if (!id) return;
 
             setLoading(true);
             const fetchedDocument = await fetchDocument(id);
+            dbg(`fetched doc: ${JSON.stringify(fetchDocument)}`)
             setDocument(fetchedDocument);
             setLoading(false);
         }
