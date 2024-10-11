@@ -21,10 +21,14 @@ export const fetchDocuments = async (): Promise<Document[]> => {
 };
 
 export const fetchDocument = async (id: string): Promise<Document> => {
-  try {
+  try
+  {
+    dbg(`Going to fetch document with id ${id}`)
     const response = await axios.get<Document>(`${API_BASE_URL}/documents/${id}`);
     return response.data;
-  } catch (error) {
+  }
+  catch (error)
+  {
     console.error(`Error fetching document with id ${id}:`, error);
     throw error;
   }
