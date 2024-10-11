@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Document } from '../model/Document';
+import { extractTitleFromContent } from './utils';
 
 const dbg = (s : string) => {
   console.log(s || '')
@@ -8,7 +9,7 @@ const dbg = (s : string) => {
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
 dbg(`Base URL is: ${API_BASE_URL}`)
 
-// Function to fetch all documents
+
 export const fetchDocuments = async (): Promise<Document[]> => {
   try {
     const response = await axios.get<Document[]>(`${API_BASE_URL}/documents`);
@@ -19,7 +20,6 @@ export const fetchDocuments = async (): Promise<Document[]> => {
   }
 };
 
-// Function to fetch a single document by ID
 export const fetchDocument = async (id: string): Promise<Document> => {
   try {
     const response = await axios.get<Document>(`${API_BASE_URL}/documents/${id}`);
@@ -30,9 +30,11 @@ export const fetchDocument = async (id: string): Promise<Document> => {
   }
 };
 
-// Function to create a new document
-export const createDocument = async (document: Omit<Document, 'id'>): Promise<Document> => {
-  try {
+export const createDocument = async (document: Omit<Document, 'id'>): Promise<Document> =>
+{
+  try
+  {
+    document.title = extractTitleFromContent(document)
     const response = await axios.post<Document>(`${API_BASE_URL}/documents`, document);
     return response.data;
   } catch (error) {
@@ -41,13 +43,18 @@ export const createDocument = async (document: Omit<Document, 'id'>): Promise<Do
   }
 };
 
-// Function to update an existing document
-export const updateDocument = async (id: string, document: Partial<Document>): Promise<Document> => {
-  try {
+export const updateDocument = async (id: string, document: Partial<Document>): Promise<Document> =>
+{
+  try
+  {
+    document.title = extractTitleFromContent(document)
     const response = await axios.put<Document>(`${API_BASE_URL}/documents/${id}`, document);
     return response.data;
-  } catch (error) {
+  }
+  catch (error)
+  {
     console.error(`Error updating document with id ${id}:`, error);
     throw error;
   }
 };
+
