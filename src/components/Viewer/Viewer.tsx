@@ -30,7 +30,7 @@ const Viewer: React.FC<ViewerProps> = ({ content }) => {
             code({ node, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '');
               const language = match ? match[1] : '';
-              const inline = language == ''; //assumption: if no language is specified, it is inline code
+              // const inline = language == ''; //assumption: if no language is specified, it is inline code
               const code = String(children).replace(/\n$/, '');
 
               const processedImage = processCodeBlock(code, language);

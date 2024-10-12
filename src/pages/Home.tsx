@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Editor from '../components/Editor/Editor';
 import Viewer from '../components/Viewer/Viewer';
 import DocumentList from '../components/DocumentList/DocumentList';
@@ -12,7 +12,7 @@ const DEFAULT_AUTHOR = 'Anonymous';
 
 const Home: React.FC = () => {
   const [currentDocument, setCurrentDocument] = useState<Document | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [_, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
