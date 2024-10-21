@@ -18,7 +18,6 @@ const ViewPage = () => {
     useEffect(() => {
       const loadDocument = async () => 
       {
-        dbg(`id is ${id}`)
         try
         {
             if (!id) return;
@@ -53,7 +52,6 @@ const ViewPage = () => {
   
     return (
       <div className="view-page">
-        <h1>{document.title}</h1>
         <Viewer content={document.content} />
       </div>
     );
