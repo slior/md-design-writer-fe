@@ -6,15 +6,20 @@ import SaveButton from '../components/SaveButton/SaveButton';
 import { fetchDocument, updateDocument, createDocument } from '../services/api';
 import { Document } from '../model/Document';
 import './Home.css';
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const DEFAULT_AUTHOR = 'Anonymous';
 
 
 const Home: React.FC = () => {
   const [currentDocument, setCurrentDocument] = useState<Document | null>(null);
+   // eslint-disable-next-line
   const [_, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { logout } = useAuth()
+  const navigate = useNavigate()
 
   const handleSelectDocument = async (id: string) => {
     try {
@@ -62,6 +67,11 @@ const Home: React.FC = () => {
     setCurrentDocument({ id: '', title: 'New Document', content: '# New Document', author: DEFAULT_AUTHOR });
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+  
   const getViewUrl = () => {
     if (currentDocument) {
       return `/view/${currentDocument.id}`;
@@ -78,6 +88,7 @@ const Home: React.FC = () => {
         <aside className="home-sidebar">
           <DocumentList onSelectDocument={handleSelectDocument} />
           <button onClick={handleNewDocument} className="new-document-button">New Document</button>
+          <button onClick={handleLogout} className="new-document-button">Logout</button>
         </aside>
         <section className="home-editor">
           {currentDocument ? (
