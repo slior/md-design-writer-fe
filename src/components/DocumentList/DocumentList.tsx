@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { fetchDocuments } from '../../services/api';
+import { fetchDocuments } from '../../services/DocumentAPI';
 import './DocumentList.css';
 import { Document } from '../../model/Document';
-// interface Document {
-//   id: string;
-//   title: string;
-// }
+
 
 interface DocumentListProps {
   onSelectDocument: (id: string) => void;

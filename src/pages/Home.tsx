@@ -3,7 +3,7 @@ import Editor from '../components/Editor/Editor';
 import Viewer from '../components/Viewer/Viewer';
 import DocumentList from '../components/DocumentList/DocumentList';
 import SaveButton from '../components/SaveButton/SaveButton';
-import { fetchDocument, updateDocument, createDocument } from '../services/api';
+import { fetchDocument, updateDocument, createDocument } from '../services/DocumentAPI';
 import { Document } from '../model/Document';
 import './Home.css';
 import { useAuth } from '../hooks/useAuth';

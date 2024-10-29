@@ -1,7 +1,7 @@
 
 import { AuthService } from './authService';
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
-import { API_BASE_URL } from './api';
+import { API_BASE_URL } from './DocumentAPI';
 
 
 export class HttpClient {

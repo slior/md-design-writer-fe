@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchDocument } from '../services/api'
+import { fetchDocument } from '../services/DocumentAPI'
 import { Document} from '../model/Document'
 import Viewer  from '../components/Viewer/Viewer'
 
