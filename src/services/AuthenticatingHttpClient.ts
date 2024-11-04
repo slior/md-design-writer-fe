@@ -4,8 +4,10 @@ import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 import { API_BASE_URL } from './DocumentAPI';
 
 
-export class HttpClient {
-  private static instance: AxiosInstance;
+export class HttpClient 
+{
+    private static instance: AxiosInstance;
+    private static nonAuthorizingInstance: AxiosInstance;
   
   private static getInstance(): AxiosInstance
   {
@@ -46,6 +48,33 @@ export class HttpClient {
                 });
             }
         return this.instance;
+  }
+
+  private static getNonAuthorizingInstance() : AxiosInstance
+  {
+    if (!this.nonAuthorizingInstance)
+    {
+        this.nonAuthorizingInstance = axios.create({
+            baseURL: `${API_BASE_URL}`,
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        });
+    }
+    return this.nonAuthorizingInstance;
+  }
+
+  static async getUnauthorized<T = Document>(url: string, config?: AxiosRequestConfig): Promise<T>
+  {
+        try
+        {
+            const response: AxiosResponse<T> = await this.getNonAuthorizingInstance().get(url, config);
+            return response.data;
+        }
+        catch (error)
+        {
+            throw this.handleError(error);
+        }
   }
 
   static async get<T = Document>(url: string, config?: AxiosRequestConfig): Promise<T>

@@ -39,6 +39,20 @@ export const fetchDocument = async (id: string): Promise<Document> => {
   }
 };
 
+export const fetchDocumentUnauthorized = async (id : string): Promise<Document> => {
+    try
+    {
+      dbg(`Going to fetch document with id ${id}`)
+      // return HttpClient.getUnauthorized<Document>(`/documents/${id}`)
+      return HttpClient.getUnauthorized<Document>(`/documents/view/${id}`)
+    }
+    catch (error)
+    {
+      console.error(`Error fetching document with id ${id}:`, error);
+      throw error;
+    }
+}
+
 export const createDocument = async (document: Omit<Document, 'id'>): Promise<Document> =>
 {
   try

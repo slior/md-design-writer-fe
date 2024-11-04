@@ -25,7 +25,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
-          <Route path="/view/:id" element={<PrivateRoute><ViewPage /></PrivateRoute>} />
+          <Route path="/view/:id" element={<ViewPage />} />
         </Routes>
       </Router>
     </AuthProvider>

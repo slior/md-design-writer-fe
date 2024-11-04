@@ -68,7 +68,6 @@ const processCodeBlock =  (code: string, language: string | undefined) =>
       const match = language.match(regex);
       console.debug(`diagram type = ${match?[1]: null}`)
       const diagType : string | null = match ? match[1] : null;
-      console.debug(`diagram type = ${diagType}\ncode = ${code}`)
       return renderKroki(code, diagType);
     }
     return null;

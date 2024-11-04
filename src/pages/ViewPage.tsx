@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchDocument } from '../services/DocumentAPI'
+import { fetchDocument, fetchDocumentUnauthorized } from '../services/DocumentAPI'
 import { Document} from '../model/Document'
 import Viewer  from '../components/Viewer/Viewer'
 
@@ -23,7 +23,7 @@ const ViewPage = () => {
             if (!id) return;
 
             setLoading(true);
-            const fetchedDocument = await fetchDocument(id);
+            const fetchedDocument = await fetchDocumentUnauthorized(id);
             dbg(`fetched doc: ${JSON.stringify(fetchDocument)}`)
             setDocument(fetchedDocument);
             setLoading(false);
